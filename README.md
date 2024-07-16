@@ -19,13 +19,14 @@ To set up the project, follow these steps:
     ENCRYPTION_KEY=your_base64_encoded_key
     ```
 
-## Generating an Encryption Key
+## Generating an encryption key
 
 To generate a suitable encryption key, you can use the following terminal commands. This key will be used for encrypting the API keys.
 
-### Unix-based Systems (Linux, macOS)
+### Unix-based systems (Linux, macOS)
 
 Open your terminal and run:
+
 ```sh
 openssl rand -base64 32
 ```
@@ -40,7 +41,7 @@ Open PowerShell and run:
 
 This will generate a base64-encoded encryption key. Add this key to your `.env` file.
 
-## Python Script
+## Python script
 
 The Python script is used to generate and encrypt API keys using the provided encryption key.
 
@@ -51,7 +52,11 @@ The Python script is used to generate and encrypt API keys using the provided en
 
 ### Usage
 
-To use the Python script, follow these steps:
+To use the Python script, follow the steps outlined below.
+
+#### Generate and encrypt an API key
+
+The `generate.py` script generates a new API key and returns it both in plain text and encrypted. You can find the complete Python scripts [here](python/generate.py).
 
 1. Navigate to the `python` directory:
 
@@ -65,15 +70,21 @@ To use the Python script, follow these steps:
     pip install cryptography python-dotenv
     ```
 
-3. Run the script:
+3. Run the script to generate and encrypt an API key:
 
     ```sh
-    python generate_api_key.py
+    python generate.py
     ```
 
-You can find the complete Python script [here](python/generate_api_key.py).
+#### Decrypt an API key
 
-## Node.js Script
+Run the `decrypt.py` script to decrypt an API key. You can find the source code [here](python/decrypt.py).
+
+```sh
+python decrypt.py <encrypted_api_key>
+```
+
+## Node.js script
 
 The Node.js script is also used to generate and encrypt API keys, leveraging the built-in `crypto` module.
 
@@ -81,10 +92,15 @@ The Node.js script is also used to generate and encrypt API keys, leveraging the
 
 - Node.js 12+
 - `dotenv` library
+- `fernet` library
 
 ### Usage
 
-To use the Node.js script, follow these steps:
+To use the Node.js script, follow the steps outlined below.
+
+#### Generate and encrypt an API key
+
+The `generate.js` script generates a new API key and returns it both in plain text and encrypted. You can find the complete script [here](node/generate.js).
 
 1. Navigate to the `node` directory:
 
@@ -95,16 +111,22 @@ To use the Node.js script, follow these steps:
 2. Install the required dependencies:
 
     ```sh
-    npm install dotenv
+    npm install dotenv fernet
     ```
 
-3. Run the script:
+3. Run the script to generate and encrypt an API key:
 
     ```sh
-    node generate_api_key.js
+    node generate.js
     ```
 
-You can find the complete Node.js script [here](node/generate_api_key.js).
+#### Decrypt an API key
+
+Run the `decrypt.js` script to decrypt an API key. You can find the source code [here](node/decrypt.js).
+
+```sh
+node decrypt.js <encrypted_api_key>
+```
 
 ## License
 
