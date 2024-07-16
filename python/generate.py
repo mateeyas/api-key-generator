@@ -2,6 +2,10 @@ import os
 import base64
 from cryptography.fernet import Fernet
 import secrets
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Load the encryption key from environment variables
 ENCRYPTION_KEY = os.getenv('ENCRYPTION_KEY')
