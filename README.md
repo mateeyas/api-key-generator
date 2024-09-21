@@ -21,7 +21,7 @@ To set up the project, follow these steps:
 
 ## Generating an encryption key
 
-To generate a suitable encryption key, you can use the following terminal commands. This key will be used for encrypting the API keys.
+To generate a suitable encryption key, you can use the following terminal commands. This key will be used for encrypting the API keys. The commands generate a base64-encoded encryption key. Add the key to your `.env` file.
 
 ### Unix-based systems (Linux, macOS)
 
@@ -33,14 +33,18 @@ openssl rand -base64 32
 
 ### Windows
 
-Open PowerShell and run:
+Open PowerShell and run this command using `RNGCryptoServiceProvider`:
 
 ```powershell
-[convert]::ToBase64String((New-Object Security.Cryptography.RNGCryptoServiceProvider).GetBytes(32))
+$bytes = New-Object byte[] 32; (New-Object System.Security.Cryptography.RNGCryptoServiceProvider).GetBytes($bytes); [Convert]::ToBase64String($bytes)
 ```
 
-This will generate a base64-encoded encryption key. Add this key to your `.env` file.
+On PowerShell 7+ you can also use this command using `RandomNumberGenerator`:
 
+```powershell
+$bytes = [byte[]]::new(32); [System.Security.Cryptography.RandomNumberGenerator]::Fill($bytes); [Convert]::ToBase64String($bytes)
+```
+1
 ## Python script
 
 The Python script is used to generate and encrypt API keys using the provided encryption key.
